@@ -5,18 +5,6 @@ class SalesHistory:
     def add_order(self, order):
         self.orders.append(order)
 
-    def display_orders(self):
-        for order in self.orders:
-            print(f"سفارش شماره {order.date}:")
-            print(f"  مشتری: {order.customer.get_full_name()}")
-            print(f"  محصولات:")
-            for product in order.products:
-                print(f"    - {product['product'].get_name()}: {product['quantity']}")
-            print(f"  قیمت کل: {order.get_total_price()}")
-            print(f"  قیمت نهایی: {order.get_offer_price()}")
-            print(f"  تاریخ: {order.date}")
-            print("-" * 20)
-
     def display_orders_list(self):
         for i, order in enumerate(self.orders):
             print(f"{i + 1}. {order.date} - {order.customer.get_full_name()} - {order.get_offer_price()}")
@@ -24,17 +12,16 @@ class SalesHistory:
     def view_order_details(self, choice):
         if 0 < choice <= len(self.orders):
             order = self.orders[choice - 1]
-            print(f"سفارش شماره {order.date}:")
-            print(f"  مشتری: {order.customer.get_full_name()}")
-            print(f"  محصولات:")
+            print(f"Date: {order.date}:")
+            print(f"    Customer: {order.customer.get_full_name()}")
+            print(f"Products: ")
             for product in order.products:
-              print(f"    - {product['product'].get_name()}: {product['quantity']}")
-            print(f"  قیمت کل: {order.get_total_price()}")
-            print(f"  تخفیف: {order.discount}%")
-            print(f"  قیمت نهایی: {order.get_offer_price()}")
-            print(f"  تاریخ: {order.date}")
+              print(f"      - {product['product'].get_name()}: {product['quantity']}")
+            print(f"Total price: {order.get_total_price()}")
+            print(f"Discount: {order.discount}%")
+            print(f"Final price: {order.get_offer_price()}")
         else:
-            print("شماره سفارش نامعتبر است!")
+            print("Try Again! ")
 
     def get_total_sales(self, start_date, end_date):
         total_sales = 0
